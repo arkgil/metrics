@@ -4,7 +4,10 @@ defmodule Metrics.Application do
   use Application
 
   def start(_type, _args) do
-    children = []
+    children = [
+      Metrics.FastTables,
+      Metrics.ViewStore
+    ]
 
     opts = [strategy: :one_for_one, name: Metrics.Supervisor]
     Supervisor.start_link(children, opts)
