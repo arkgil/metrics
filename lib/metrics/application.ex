@@ -6,7 +6,8 @@ defmodule Metrics.Application do
   def start(_type, _args) do
     children = [
       Metrics.FastTables,
-      Metrics.ViewStore
+      Metrics.ViewStore,
+      Metrics.ReporterSupervisor
     ]
 
     opts = [strategy: :one_for_one, name: Metrics.Supervisor]

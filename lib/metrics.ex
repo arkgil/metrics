@@ -9,6 +9,8 @@ defmodule Metrics do
   @type measurement :: number
   @type view :: [atom | String.t() | number]
   @type view_type :: :gauge
+  @type value :: {atom, number}
+  @type reporter :: module
 
   @doc """
   Records a single measurement of a metric
