@@ -7,7 +7,7 @@ defmodule Metrics.Reporter do
 
   use GenServer
 
-  alias Metrics.ReporterSupervisor
+  alias Metrics.{ReporterSupervisor, ReporterStore}
 
   @doc """
   Called whenever any of the views emits its values
@@ -49,11 +49,12 @@ defmodule Metrics.Reporter do
   @doc false
   @spec notify(pid, Metris.metric(), Metrics.view(), [Metrics.value()], NaiveDateTime.t()) :: :ok
   def notify(pid, metric, view, values, timestamp) do
-    GenServer.cast(pid, {:emitted, metrics, view, values, timestamp})
+    GenServer.cast(pid, {:emitted, metric, view, values, timestamp})
   end
 
   @impl true
   def init([reporter]) do
+    :ok = ReporterStore.register()
     {:ok, %{reporter: reporter}}
   end
 

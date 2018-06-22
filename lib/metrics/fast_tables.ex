@@ -1,6 +1,10 @@
 defmodule Metrics.FastTables do
   @moduledoc false
 
+  ## get/0 and get_all/0 could be parametrized, e.g. get(:views), get(:counters), etc. - -this way
+  ## we could try out and benchmark different implementations, e.g. separete tables for counters
+  ## and views, one global table etc.
+
   use GenServer
 
   @type t :: :ets.tab()

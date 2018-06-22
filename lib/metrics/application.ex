@@ -7,6 +7,7 @@ defmodule Metrics.Application do
     children = [
       Metrics.FastTables,
       Metrics.ViewStore,
+      Metrics.ReporterStore,
       Metrics.ReporterSupervisor
     ]
 
