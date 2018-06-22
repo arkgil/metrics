@@ -8,6 +8,7 @@ defmodule Metrics.Application do
       Metrics.FastTables,
       Metrics.ViewStore,
       Metrics.Gauge,
+      Metrics.ProbeSupervisor,
       Metrics.ReporterStore,
       Metrics.ReporterSupervisor
     ]
