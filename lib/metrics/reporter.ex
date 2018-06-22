@@ -38,9 +38,7 @@ defmodule Metrics.Reporter do
     GenServer.start_link(__MODULE__, [reporter], [])
   end
 
-  @doc """
-  Starts a given reporter under Metric's supervision tree
-  """
+  @doc false
   @spec start(Metrics.reporter()) :: Supervisor.on_start_child()
   def start(reporter) do
     ReporterSupervisor.start_child([reporter])

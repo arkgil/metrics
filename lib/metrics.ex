@@ -3,7 +3,7 @@ defmodule Metrics do
   Application for gathering, aggregating and reporting metrics.
   """
 
-  alias Metrics.{ViewStore, Gauge}
+  alias Metrics.{ViewStore, Gauge, Reporter}
 
   @type metric :: [atom | String.t() | number]
   @type measurement :: number
@@ -26,5 +26,13 @@ defmodule Metrics do
   @spec add_view(metric, view, view_type) :: :ok | {:error, :already_exists}
   def add_view(metric, view, :gauge) do
     Gauge.register(metric, view)
+  end
+
+  @doc """
+  Adds a new reporter susbcribed to all the metrics
+  """
+  @spec add_reporter(reporter) :: Supervisor.on_start_child()
+  def add_reporter(reporter) do
+    Reporter.start(reporter)
   end
 end
