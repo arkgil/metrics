@@ -3,9 +3,15 @@ defmodule Metrics.Reporters.Console do
   Reporter printing emitted values to the console
   """
 
-  @behaviour Metrics.Reporter
+  use Metrics.Reporter
 
-  def handle_emit(_metric, view, values, ts) do
+  @impl true
+  def init(_arg) do
+    {:ok, %{}}
+  end
+
+  @impl true
+  def handle_emit(_metric, view, values, ts, state) do
     formatted_date = ts |> NaiveDateTime.to_date() |> Date.to_iso8601()
     formatted_time = ts |> NaiveDateTime.to_time() |> Time.to_iso8601()
 
@@ -35,5 +41,6 @@ defmodule Metrics.Reporters.Console do
     ]
 
     IO.puts(line)
+    {:noreply, state}
   end
 end

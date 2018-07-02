@@ -11,6 +11,7 @@ defmodule Metrics do
   @type view_type :: :gauge
   @type value :: {atom, number}
   @type reporter :: module
+  @type timestamp :: NaiveDateTime.t()
 
   @doc """
   Records a single measurement of a metric
@@ -31,8 +32,8 @@ defmodule Metrics do
   @doc """
   Adds a new reporter susbcribed to all the metrics
   """
-  @spec add_reporter(reporter) :: Supervisor.on_start_child()
-  def add_reporter(reporter) do
-    Reporter.start(reporter)
+  @spec add_reporter(reporter, arg :: term(), GenServer.options()) :: Supervisor.on_start_child()
+  def add_reporter(reporter, arg, opts \\ []) do
+    Reporter.start(reporter, arg, opts)
   end
 end
